@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+  <!--================Cart Area =================-->
+  <section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for i in ci %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="{{  i.prod.image.url }}" style="height:150px; width:150px;" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{ i.prod.desc }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <h5>${{ i.prod.price }}</h5>
+                </td>
+                <td>
+                  <div class="product_count">
+                    <a href="{% url 'add' i.prod.id %}"><span class="input-number-increment"> <i class="ti-angle-up"></i></span></a>
+                    <input class="input-number" type="text" value="{{ i.quantity }}">
+                    <a href="{% url 'min' i.prod.id %}"><span class="input-number-decrement"> <i class="ti-angle-down"></i></span></a>
+                  </div>
+                </td>
+                <td>
+                    <h5> ${{ i.total }}</h5>
+                </td>
+              </tr>
+              {% endfor %}
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Subtotal</h5>
+                </td>
+                <td>
+                  <h5>${{ tot }}</h5>
+                </td>
+              </tr>
+
+              <tr class="bottom_button">
+                <td>
+                  <a class="btn_1" href={% url 'cartview' %}>Update Cart</a>
+                </td>
+                <td></td>
+                <td></td>
+                <td>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="checkout_btn_inner float-right">
+            <a class="btn_1" href={% url 'home' %}>Continue Shopping</a>
+            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
+          </div>
+        </div>
+      </div>
+      </div>
+  </section>
+
+  <!--================End Cart Area =================-->
+
+  <!--::footer_part start::-->
+  <footer class="footer_part">
+
+    <div class="copyright_part">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="copyright_text">
+              <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="footer_icon social_icon">
+              <ul class="list-unstyled">
+                <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+{% endblock %}
